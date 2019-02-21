@@ -1,0 +1,39 @@
+# Update Homebrew itself, upgrade all packages, remove dead symlinks, remove old versions
+# of installed formulas, clean old downloads from cache, remove versions of formulas, which
+# are downloaded, but not installed, check system for potential problems
+alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+
+# Easier navigation
+alias ..="cd .."
+alias ....="cd ../.."
+
+# Shortcuts
+alias code="cd ~/Code"
+alias coy="cd ~/Code/StashAway"
+alias desk="cd ~/Desktop"
+if (( $+commands[trash] )); then
+  alias rm=trash
+fi
+
+
+# Use `hub` as our git wrapper:
+# http://defunkt.github.com/hub/
+hub_path=$(which hub)
+if (( $+commands[hub] )); then
+  alias git=$hub_path
+fi
+
+# prompt scheme
+autoload -U promptinit; promptinit
+PURE_CMD_MAX_EXEC_TIME=10
+prompt pure
+
+# autocomplete
+autoload -U compinit && compinit
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+if (( $+commands[nvm] )); then
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+

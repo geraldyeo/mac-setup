@@ -25,11 +25,11 @@ ARROW="$CYAN$BOLD==>$DEFAULT"
 ARROW_GREEN="$GREEN$BOLD==>$DEFAULT"
 ARROW_YELLOW="$YELLOW$BOLD==>$DEFAULT"
 # Array of available applications that can be installed via Homebrew Cask
-AVAILABLE_CASK_APPLICATIONS=(appcleaner background-music cyberduck drawio firefox flux google-chrome gpg-suite keepingyouawake keka mamp opera postman sequel-pro skype slack sourcetree spectacle spotify transmission tunnelblick visual-studio-code vlc)
+AVAILABLE_CASK_APPLICATIONS=(background-music cleanmymac firefox google-chrome insomnia keka paw sequel-pro skype slack spotify tower transmission vanilla visual-studio-code vlc)
 # Array of available npm packages
-AVAILABLE_NPM_PACKAGES=(gulp-cli jest live-server create-react-app)
+AVAILABLE_NPM_PACKAGES=(alfred-npms commitizen concurrently create-react-app jest-cli lerna pm prettier trash-cli)
 # Array of available VS Code extensions
-AVAILABLE_VSCODE_EXTENSIONS=(CoenraadS.bracket-pair-colorizer msjsdiag.debugger-for-chrome dbaeumer.vscode-eslint eamodio.gitlens esbenp.prettier-vscode jpoissonnier.vscode-styled-components PKief.material-icon-theme techer.open-in-browser)
+AVAILABLE_VSCODE_EXTENSIONS=(Shan.code-settings-sync)
 # Arrays of applications/packages/extensions selected by user (empty by default)
 SELECTED_CASK_APPLICATIONS=()
 SELECTED_NPM_PACKAGES=()
@@ -92,24 +92,11 @@ fi
 #----------------------------
 
 if $IS_HOMEBREW_INSTALLED; then
-  read -p "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
+  read -p "${ARROW_YELLOW} Install latest Git & Hub version via Homebrew? [y/n]: "
 
   if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Installing Git..."
-    brew install git
-  fi
-fi
-
-#----------------------------
-# Ruby
-#----------------------------
-
-if $IS_HOMEBREW_INSTALLED; then
-  read -p "${ARROW_YELLOW} Install latest Ruby version via Homebrew? [y/n]: "
-
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Installing Ruby..."
-    brew install ruby
+    echo "${ARROW} Installing Git & Hub..."
+    brew install git hub
   fi
 fi
 
@@ -132,14 +119,14 @@ if [ "$REPLY" == "y" ]; then
 fi
 
 #----------------------------
-# .bash_profile
+# .localrc
 #----------------------------
 
-read -p "${ARROW_YELLOW} Configure bash by creating ~/.bash_profile file? [y/n]: "
+read -p "${ARROW_YELLOW} Configure bash by creating ~/.localrc file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
-  echo "${ARROW} Creating ~/.bash_profile file..."
-  cp .bash_profile ~ 
+  echo "${ARROW} Creating ~/.localrc file..."
+  cp .localrc ~ 
 fi
 
 #----------------------------
@@ -169,17 +156,6 @@ if $IS_HOMEBREW_INSTALLED; then
 fi
 
 #----------------------------
-# Terminal profile
-#----------------------------
-
-read -p "${ARROW_YELLOW} Download Flat Terminal profile? [y/n]: "
-
-if [ "$REPLY" == "y" ]; then
-  echo "${ARROW_YELLOW} New Terminal window opened. Click 'Shell' > 'Use settings as default' to use it as default profile."
-  open ./Flat.terminal
-fi
-
-#----------------------------
 # Node Version Manager
 #----------------------------
 
@@ -194,8 +170,8 @@ else
 
   if [ "$REPLY" == "y" ]; then
     echo "${ARROW} Installing Node Version Manager..."
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-    source ~/.bash_profile
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    source ~/.localrc
 
     IS_NVM_INSTALLED=true
   fi
@@ -252,6 +228,20 @@ if $IS_NODE_INSTALLED; then
 fi
 
 #----------------------------
+# yarn
+#----------------------------
+
+if $IS_NODE_INSTALLED; then
+  read -p "${ARROW_YELLOW} Install Yarn? [y/n]: "
+
+  if [ "$REPLY" == "y" ]; then
+    echo "${ARROW} Installing Yarn..."
+    brew install yarn --ignore-dependencies
+  fi
+
+fi
+
+#----------------------------
 # VS Code extensions
 #----------------------------
 
@@ -282,60 +272,17 @@ if $IS_VSCODE_INSTALLED; then
 fi
 
 #----------------------------
-# VS Code settings
-#----------------------------
-
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Visual Studio Code settings? [y/n]: "
-
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Visual Studio Code settings..."
-    cp settings.json /Users/${USER}/Library/Application\ Support/Code/User
-  fi
-fi
-
-#----------------------------
 # VS Code snippets
 #----------------------------
 
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Visual Studio Code snippets? [y/n]: "
+# if $IS_VSCODE_INSTALLED; then
+#   read -p "${ARROW_YELLOW} Configure Visual Studio Code snippets? [y/n]: "
 
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Visual Studio Code snippets..."
-    cp snippets.code-snippets /Users/${USER}/Library/Application\ Support/Code/User/snippets
-  fi
-fi
-
-#----------------------------
-# VS Code keybindings
-#----------------------------
-
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Visual Studio Code keybindings? [y/n]: "
-
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Visual Studio Code keybindings..."
-    cp keybindings.json /Users/${USER}/Library/Application\ Support/Code/User
-  fi
-fi
-
-#----------------------------
-# Spectacle shortcuts
-#----------------------------
-
-if [ -d /Applications/Spectacle.app/ ]; then
-  IS_SPECTACLE_INSTALLED=true
-fi
-
-if $IS_SPECTACLE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Spectacle shotrcuts? [y/n]: "
-
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Spectacle shotrcuts..."
-    cp -r spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2> /dev/null
-  fi
-fi
+#   if [ "$REPLY" == "y" ]; then
+#     echo "${ARROW} Configuring Visual Studio Code snippets..."
+#     cp snippets.code-snippets /Users/${USER}/Library/Application\ Support/Code/User/snippets
+#   fi
+# fi
 
 #----------------------------
 # Firmware password
