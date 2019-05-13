@@ -24,9 +24,13 @@ if (( $+commands[hub] )); then
 fi
 
 # prompt scheme
-autoload -U promptinit; promptinit
 PURE_CMD_MAX_EXEC_TIME=10
-prompt pure
+autoload -U promptinit; promptinit
+
+[[ -s "${ZDOTDIR:-$HOME}/.p9k.sh" ]] && source "${ZDOTDIR:-$HOME}/.p9k.sh"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE="nerdfont-complete"
+prompt powerlevel9k
 
 # autocomplete
 autoload -U compinit && compinit

@@ -125,8 +125,10 @@ fi
 read -p "${ARROW_YELLOW} Configure bash by creating ~/.localrc file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
+  echo "${ARROW} Creating ~/.p9k.sh file..."
+  cp .p9k.sh ~
   echo "${ARROW} Creating ~/.localrc file..."
-  cp .localrc ~ 
+  cp .localrc ~
 fi
 
 #----------------------------
