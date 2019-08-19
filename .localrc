@@ -1,20 +1,20 @@
 # Update Homebrew itself, upgrade all packages, remove dead symlinks, remove old versions
 # of installed formulas, clean old downloads from cache, remove versions of formulas, which
 # are downloaded, but not installed, check system for potential problems
-alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+alias brewup='brew update; brew upgrade; brew cleanup --prune 30; brew doctor'
 
 # Easier navigation
 alias ..="cd .."
 alias ....="cd ../.."
 
 # Shortcuts
-alias code="cd ~/Code"
-alias coy="cd ~/Code/StashAway"
+alias pers="cd ~/Projects/Code/Personal"
+alias work="cd ~/Projects/Code/Work"
 alias desk="cd ~/Desktop"
+
 if (( $+commands[trash] )); then
   alias rm=trash
 fi
-
 
 # Use `hub` as our git wrapper:
 # http://defunkt.github.com/hub/
@@ -25,19 +25,8 @@ fi
 
 # prompt scheme
 PURE_CMD_MAX_EXEC_TIME=10
-autoload -U promptinit; promptinit
-
-[[ -s "${ZDOTDIR:-$HOME}/.p9k.sh" ]] && source "${ZDOTDIR:-$HOME}/.p9k.sh"
-ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE="nerdfont-complete"
-prompt powerlevel9k
-
-# autocomplete
+ZSH_THEME="powerlevel9k/powerlevel9k"
+autoload -U promptinit; promptinit
 autoload -U compinit && compinit
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-if (( $+commands[nvm] )); then
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-fi
-
+prompt powerlevel9k

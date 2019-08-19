@@ -161,7 +161,7 @@ fi
 # Node Version Manager
 #----------------------------
 
-if ! [ -x "$(command -v nvm)" ]; then
+if [ "$(command -v nvm)" = "nvm" ]; then
   IS_NVM_INSTALLED=true
 fi
 
@@ -173,7 +173,6 @@ else
   if [ "$REPLY" == "y" ]; then
     echo "${ARROW} Installing Node Version Manager..."
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-    source ~/.localrc
 
     IS_NVM_INSTALLED=true
   fi
@@ -238,7 +237,7 @@ if $IS_NODE_INSTALLED; then
 
   if [ "$REPLY" == "y" ]; then
     echo "${ARROW} Installing Yarn..."
-    brew install yarn --ignore-dependencies
+    brew install yarn
   fi
 
 fi
