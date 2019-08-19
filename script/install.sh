@@ -25,7 +25,7 @@ ARROW="$CYAN$BOLD==>$DEFAULT"
 ARROW_GREEN="$GREEN$BOLD==>$DEFAULT"
 ARROW_YELLOW="$YELLOW$BOLD==>$DEFAULT"
 # Array of available applications that can be installed via Homebrew Cask
-AVAILABLE_CASK_APPLICATIONS=(background-music cleanmymac firefox google-chrome insomnia keka paw sequel-pro skype slack spotify tower transmission vanilla visual-studio-code vlc)
+AVAILABLE_CASK_APPLICATIONS=(backblaze background-music cleanmymac firefox google-chrome insomnia keka paw postman sequel-pro skype slack spotify tower transmit vanilla visual-studio-code vlc)
 # Array of available npm packages
 AVAILABLE_NPM_PACKAGES=(alfred-npms commitizen concurrently create-react-app jest-cli lerna pm prettier trash-cli)
 # Array of available VS Code extensions

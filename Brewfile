@@ -1,7 +1,8 @@
 brew "zsh"
 brew "git"
 brew "hub"
-brew "yarn", args: ["ignore-dependencies"]
+brew "yarn"
+brew "direnv"
 brew "mas"
 
 cask "backblaze"
